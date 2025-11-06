@@ -1,4 +1,5 @@
 🏺 ArchaeoMap – Sistema de Mapeamento de Sítios Arqueológicos
+
 📖 Descrição do Projeto
 
 O ArchaeoMap é um aplicativo voltado para robótica competitiva aplicada à arqueologia, desenvolvido para auxiliar equipes de arqueólogos no mapeamento digital de sítios arqueológicos e na identificação de artefatos em campo.
@@ -94,11 +95,17 @@ O projeto segue a metodologia Scrum, adotando práticas ágeis para garantir ent
 
 👥 Papéis
 
-Product Owner: <u
+Product Owner:  <a href="https://www.linkedin.com/in/andré-siqueira08" target="_blank"><u>André Siqueira</u></a> <br>
 
-Scrum Master: Facilita o processo e remove impedimentos.
+Scrum Master: Guilherme Marques
 
-Equipe de Desenvolvimento: Implementa as funcionalidades e realiza testes.
+Equipe de Desenvolvimento: 
+
+Miguel Boa Viagem
+Bruno Ferreira
+José Clayton
+João Gabriel Coutinho
+Rafael
 
 
 📦 Instalação e Execução
