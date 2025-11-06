@@ -6,7 +6,7 @@ O ArchaeoMap é um aplicativo voltado para robótica competitiva aplicada à arq
 
 A proposta do sistema é unir tecnologia de escaneamento, georreferenciamento e mapeamento em tempo real, permitindo que os arqueólogos possam identificar, registrar e consultar informações detalhadas sobre cada artefato descoberto.
 
-🚀 Principais Funcionalidades
+🚀 Principais Funcionalidades <br>
 🗺️ 1. Sistema de Mapeamento Interativo
 
 O aplicativo utiliza sensores e algoritmos de escaneamento para detectar o ponto zero (ponto mais alto) da área de escavação.
