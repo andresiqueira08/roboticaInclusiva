@@ -101,16 +101,16 @@ Scrum Master: Guilherme Marques
 
 Equipe de Desenvolvimento: 
 
-Miguel Boa Viagem
-Bruno Ferreira
-José Clayton
-João Gabriel Coutinho
-Rafael
+Miguel Boa Viagem <br>
+Bruno Ferreira <br>
+José Clayton <br>
+João Gabriel Coutinho <br>
+Rafael <br>
 
 
 📦 Instalação e Execução
 1️⃣ Clonar o repositório
-git clone https://github.com/usuario/ArchaeoMap.git
+git clone https://github.com/usuario/roboticaInclusiva.git
 cd ArchaeoMap
 
 2️⃣ Instalar dependências
