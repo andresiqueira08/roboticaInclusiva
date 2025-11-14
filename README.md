@@ -1,133 +1,143 @@
 🏺 ArchaeoMap – Sistema de Mapeamento de Sítios Arqueológicos
 
-📖 Descrição do Projeto
+O ArchaeoMap é um sistema inovador que combina robótica competitiva, geolocalização e arqueologia, permitindo que equipes de escavação realizem mapeamento digital em tempo real, marquem artefatos no campo e tenham acesso rápido a dados organizados e acessíveis.
 
-O ArchaeoMap é um aplicativo voltado para robótica competitiva aplicada à arqueologia, desenvolvido para auxiliar equipes de arqueólogos no mapeamento digital de sítios arqueológicos e na identificação de artefatos em campo.
+O projeto foi desenvolvido para agilizar o início do trabalho arqueológico, reduzir erros manuais no mapeamento e integrar tecnologias modernas como LIDAR, visão computacional e sensores inteligentes.
 
-A proposta do sistema é unir tecnologia de escaneamento, georreferenciamento e mapeamento em tempo real, permitindo que os arqueólogos possam identificar, registrar e consultar informações detalhadas sobre cada artefato descoberto.
-
-🚀 Principais Funcionalidades <br>
+🚀 Principais Funcionalidades
 🗺️ 1. Sistema de Mapeamento Interativo
 
-O aplicativo utiliza sensores e algoritmos de escaneamento para detectar o ponto zero (ponto mais alto) da área de escavação.
+Identificação automática do ponto zero (ponto mais alto) da área de escavação.
 
-Realiza o mapeamento em tempo real, atualizando o mapa conforme a área de escavação aumenta.
+Mapeamento contínuo conforme o robô ou arqueólogo se desloca.
 
-Permite marcar pontos no mapa onde artefatos foram encontrados.
+Marcação de coordenadas onde artefatos são encontrados.
 
-Cada marcação gera automaticamente um cartão de identificação do artefato, contendo informações como:
+Geração automática de cartões de identificação, contendo:
 
 Nome do artefato
 
 Descrição
 
-Coordenadas de localização
+Coordenadas
 
-Data e hora do registro
+Data e hora
 
 Imagem do local
 
-O arqueólogo pode baixar a imagem do local marcado diretamente pelo aplicativo.
+Possibilidade de baixar o mapa ou a imagem da marcação diretamente pelo aplicativo.
 
 🏠 2. Página Inicial
 
-Tela inicial amigável com menu de acesso rápido às principais funções:
+Interface intuitiva com acesso rápido às principais ferramentas:
 
 Mapa de escavação
 
 Lista de equipamentos
 
-Lista de artefatos
+Artefatos descobertos
 
-Login / Logout
+Login/Logout
 
-🧰 3. Listagem de Equipamentos dos Arqueólogos
+🧰 3. Listagem de Equipamentos
 
-Tela dedicada para o gerenciamento e visualização dos equipamentos disponíveis.
+Seção dedicada ao controle e organização dos equipamentos de campo.
 
-Cada equipamento possui:
+Cada item inclui:
 
 Nome
 
-Estado de uso (em campo, disponível, em manutenção)
+Estado (disponível, em uso, em manutenção)
 
 Responsável atual
 
-🔐 4. Sistema de Login
+🔐 4. Sistema de Login e Permissões
 
-Acesso restrito aos arqueólogos autorizados.
+Acesso exclusivo para arqueólogos autorizados.
 
-Login realizado com nome de usuário e senha.
+Autenticação via usuário + senha (JWT / OAuth 2.0).
 
-Após o login, o arqueólogo tem acesso ao mapa interativo e às marcações virtuais dos artefatos.
+Redirecionamento automático para o Painel do Arqueólogo.
 
-Cada marcação pode ser clicada para exibir o cartão de identificação do artefato correspondente.
+Permissões específicas:
 
-🏺 5. Listagem de Artefatos Escavados e Pesquisados
+Arqueólogos → acesso ao mapa interativo e marcações
 
-Página pública onde é possível visualizar os artefatos já descobertos.
+Público → apenas visualização dos artefatos publicados
+
+🏺 5. Listagem Pública de Artefatos
+
+Página aberta ao público onde é possível explorar os itens já descobertos.
 
 Inclui:
 
-Imagens dos artefatos
+Imagens
 
-Breve descrição
+Descrição curta
 
-Localização aproximada
+Localização aproximada (protegida)
 
 Status da pesquisa
 
 🤖 Tecnologias Utilizadas
+Frontend
 
-Frontend: React Native / Flutter (para o app) e React.js (para o site)
+React Native ou Flutter (aplicativo móvel)
 
-Backend: Node.js / Python (Django ou FastAPI)
+React.js (web)
 
-Banco de Dados: PostgreSQL / MongoDB
+Backend
 
-Mapeamento e Escaneamento: APIs de Geolocalização, sensores LIDAR / visão computacional
+Node.js
+ou
 
-Autenticação: JWT / OAuth 2.0
+Python (Django / FastAPI)
 
-🧭 Metodologia de Desenvolvimento – SCRUM
+Banco de Dados
 
-O projeto segue a metodologia Scrum, adotando práticas ágeis para garantir entregas rápidas e eficientes.
+PostgreSQL
 
-👥 Papéis
+MongoDB (casos específicos)
 
-Product Owner:  <a href="https://www.linkedin.com/in/andré-siqueira08" target="_blank"><u>André Siqueira</u></a> <br>
+Mapeamento e Escaneamento
+
+Sensores LIDAR
+
+Visão Computacional
+
+APIs de Geolocalização
+
+Autenticação
+
+JWT
+
+OAuth 2.0
+
+🧭 Metodologia – SCRUM
+
+O projeto segue o framework Scrum, garantindo entregas iterativas e alinhamento contínuo com as demandas do campo arqueológico.
+
+Papéis
+
+Product Owner: <a href="https://www.linkedin.com/in/andr%C3%A9-siqueira-459b822ba/" target="_blank" rel="noopener noreferrer">André Siqueira</a>
+
 
 Scrum Master: Guilherme Marques
 
-Equipe de Desenvolvimento: 
+Equipe de Desenvolvimento
 
-Miguel Boa Viagem <br>
-Bruno Ferreira <br>
-José Clayton <br>
-João Gabriel Coutinho <br>
-Rafael <br>
+Miguel Boa Viagem
 
+Bruno Ferreira
 
-📦 Instalação e Execução
-1️⃣ Clonar o repositório
-git clone https://github.com/usuario/roboticaInclusiva.git
-cd ArchaeoMap
+José Clayton
 
-2️⃣ Instalar dependências
-npm install
-# ou
-pip install -r requirements.txt
+João Gabriel Coutinho
 
-3️⃣ Executar o servidor
-npm start
-# ou
-python manage.py runserver
+Rafael
 
-4️⃣ Executar o app móvel
-npx react-native run-android
-# ou
-flutter run
 
 🧪 Status do Projeto
 
-🚧 Em desenvolvimento – funcionalidades principais sendo implementadas e testadas em campo com protótipos de robôs de escaneamento.
+🚧 Em desenvolvimento
+As funcionalidades principais estão sendo implementadas e testadas em conjunto com protótipos de robôs de escaneamento para validação em campo.
