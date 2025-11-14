@@ -79,43 +79,11 @@ Localização aproximada (protegida)
 
 Status da pesquisa
 
-🤖 Tecnologias Utilizadas
-Frontend
-
-React Native ou Flutter (aplicativo móvel)
-
-React.js (web)
-
-Backend
-
-Node.js
-ou
-
-Python (Django / FastAPI)
-
-Banco de Dados
-
-PostgreSQL
-
-MongoDB (casos específicos)
-
-Mapeamento e Escaneamento
-
-Sensores LIDAR
-
-Visão Computacional
-
-APIs de Geolocalização
-
-Autenticação
-
-JWT
-
-OAuth 2.0
 
 🧭 Metodologia – SCRUM
 
 O projeto segue o framework Scrum, garantindo entregas iterativas e alinhamento contínuo com as demandas do campo arqueológico.
+<a href = "https://trello.com/invite/b/690c84ee5613cbbddf11c46a/ATTI05d4c6dd2e427e012300288210981de2B7EA257A/como-ajudar-os-arqueologos-no-dia-a-dia" target="_blank">Link do quadro do trello</a>
 
 Papéis
 
