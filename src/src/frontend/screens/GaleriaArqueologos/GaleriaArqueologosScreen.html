@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Galeria - Arqueólogos</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/mobile.css">
+</head>
+
+<body>
+    <div class="screen galeria-screen active">
+        <div class="page">
+
+            <!-- TOPO -->
+            <div class="top-bar">
+                <div class="title">Meus Mapas</div>
+                <div class="icon-buttons">
+                    <div class="icon" id="btnProfile">👤</div>
+                </div>
+            </div>
+
+            <!-- LISTA -->
+            <div class="list">
+                <div class="section-title">
+                    <div class="title3">Mapas Criados</div>
+                    <div class="subtitle">Gerencie seus projetos arqueológicos</div>
+                </div>
+
+                <div id="galeriaGrid" class="galeria-grid"></div>
+
+                <div id="emptyState" class="empty-state" style="display: none;">
+                    <div class="empty-icon">🗺️</div>
+                    <h3>Nenhum mapa criado</h3>
+                    <p>Adicione seu primeiro mapa</p>
+                </div>
+            </div>
+
+            <!-- BOTÃO ADICIONAR - FLUTUANTE -->
+            <button id="btnAddMap">
+                <span class="title10">+ Adicionar Mapa</span>
+            </button>
+
+            <!-- BOTTOM NAV -->
+            <div class="bottom-nav">
+                <div class="tab active" id="tabGaleria">
+                    <div class="icon2">🏠</div>
+                    <div class="title9">Galeria</div>
+                </div>
+
+                <div class="tab" id="tabCatalogo">
+                    <div class="icon2">📋</div>
+                    <div class="title9">Catálogo</div>
+                </div>
+
+                <div class="tab" id="tabPerfil">
+                    <div class="icon2">👤</div>
+                    <div class="title9">Perfil</div>
+                </div>
+            </div>
+
+            <!-- MODAL -->
+            <div class="modal" id="mapModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title">Adicionar Mapa</div>
+                        <button class="close-modal" id="closeMapModal">&times;</button>
+                    </div>
+
+                    <div class="modal-options">
+                        <div class="modal-option" id="optionGallery">
+                            <span>📷</span> Abrir galeria
+                        </div>
+
+                        <div class="modal-option" id="optionFiles">
+                            <span>📁</span> Abrir arquivos
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INPUTS OCULTOS -->
+            <input type="file" id="imageInput" accept="image/*" style="display: none;">
+            <input type="file" id="fileInput" accept="image/*" style="display: none;">
+
+            <!-- NOTIFICAÇÃO -->
+            <div class="notification" id="notification"></div>
+
+        </div>
+    </div>
+
+    <script>
+        // ELEMENTOS
+        const galeriaGrid = document.getElementById("galeriaGrid");
+        const emptyState = document.getElementById("emptyState");
+        const btnAddMap = document.getElementById("btnAddMap");
+        const mapModal = document.getElementById("mapModal");
+        const closeMapModal = document.getElementById("closeMapModal");
+        const imageInput = document.getElementById("imageInput");
+        const fileInput = document.getElementById("fileInput");
+        const optionGallery = document.getElementById("optionGallery");
+        const optionFiles = document.getElementById("optionFiles");
+
+        const btnProfile = document.getElementById("btnProfile");
+        const notification = document.getElementById("notification");
+
+        let userMaps = [];
+
+        function showNotification(msg, type = "success") {
+            notification.textContent = msg;
+            notification.style.display = "block";
+            notification.style.background =
+                type === "success" ? "var(--primary-color)" : "var(--error-color)";
+            setTimeout(() => (notification.style.display = "none"), 2500);
+        }
+
+        // ----- CARREGAR MAPAS -----
+        function loadMaps() {
+            const saved = localStorage.getItem("userMaps");
+            userMaps = saved ? JSON.parse(saved) : [];
+            renderMaps();
+        }
+
+        function renderMaps() {
+            galeriaGrid.innerHTML = "";
+
+            if (userMaps.length === 0) {
+                emptyState.style.display = "block";
+                return;
+            }
+
+            emptyState.style.display = "none";
+
+            userMaps.forEach((map) => {
+                const card = document.createElement("div");
+                card.classList.add("map-card");
+                card.setAttribute("data-id", map.id);
+
+                card.innerHTML = `
+                    <div class="map-card-image">
+                        <img src="${map.image}">
+                        <div class="map-card-overlay">
+                            <div class="delete-btn" data-id="${map.id}">🗑️</div>
+                        </div>
+                    </div>
+
+                    <div class="map-card-info">
+                        <h4>${map.name}</h4>
+                        <p>Criado em ${map.createdDate}</p>
+                    </div>
+                `;
+
+                card.addEventListener("click", (e) => {
+                    if (e.target.classList.contains("delete-btn")) return;
+                    openMap(map.id);
+                });
+
+                galeriaGrid.appendChild(card);
+            });
+
+            // BOTÕES DELETAR
+            document.querySelectorAll(".delete-btn").forEach((btn) => {
+                btn.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    deleteMap(btn.getAttribute("data-id"));
+                });
+            });
+        }
+
+        function deleteMap(id) {
+            userMaps = userMaps.filter((m) => m.id != id);
+            localStorage.setItem("userMaps", JSON.stringify(userMaps));
+            renderMaps();
+            showNotification("Mapa removido");
+        }
+
+        // 🔥 CORRIGIDO PARA ABRIR A NOVA TELA MapaView
+        function openMap(id) {
+            const map = userMaps.find((m) => m.id == id);
+            if (!map) return;
+
+            localStorage.setItem("currentMap", JSON.stringify(map));
+
+            window.location.href = "../Mapa/MapaView.html";
+        }
+
+        // ----- ADICIONAR MAPA -----
+        btnAddMap.addEventListener("click", () => {
+            mapModal.classList.add("active");
+        });
+
+        closeMapModal.addEventListener("click", () => {
+            mapModal.classList.remove("active");
+        });
+
+        optionGallery.addEventListener("click", () => {
+            imageInput.click();
+        });
+
+        optionFiles.addEventListener("click", () => {
+            fileInput.click();
+        });
+
+        imageInput.addEventListener("change", handleImage);
+        fileInput.addEventListener("change", handleImage);
+
+        function handleImage(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = () => {
+                addMap(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function addMap(imageSrc) {
+            const map = {
+                id: Date.now(),
+                name: `Mapa ${userMaps.length + 1}`,
+                image: imageSrc,
+                createdDate: new Date().toLocaleDateString("pt-BR"),
+            };
+
+            userMaps.unshift(map);
+            localStorage.setItem("userMaps", JSON.stringify(userMaps));
+            renderMaps();
+
+            mapModal.classList.remove("active");
+            showNotification("Mapa adicionado!");
+        }
+
+        // ----- BOTÃO PERFIL -----
+        btnProfile.addEventListener("click", () => {
+            window.location.href = "../PerfilUsuario/PerfilUsuarioScreen.html";
+        });
+
+        // ----- BOTTOM NAV -----
+        document.getElementById("tabCatalogo").addEventListener("click", () => {
+            window.location.href = "../../index.html";
+        });
+
+        document.getElementById("tabPerfil").addEventListener("click", () => {
+            window.location.href = "../PerfilUsuario/PerfilUsuarioScreen.html";
+        });
+
+        // INICIALIZAÇÃO
+        document.addEventListener("DOMContentLoaded", loadMaps);
+    </script>
+
+    <!-- CSS ESPECÍFICO -->
+    <style>
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .map-card {
+            background: var(--surface-color);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .map-card:hover {
+            transform: scale(1.01);
+        }
+
+        .map-card-image {
+            position: relative;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .map-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .map-card-overlay {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+
+        .delete-btn {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 6px 10px;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .delete-btn:hover {
+            background: rgba(150, 0, 0, 0.7);
+        }
+    </style>
+</body>
+</html>
